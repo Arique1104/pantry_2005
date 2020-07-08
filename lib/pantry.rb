@@ -1,7 +1,7 @@
 class Pantry
  attr_reader :stock
   def initialize
-    @stock = Hash.new{0}
+    @stock = Hash.new(0)
   end
 
   def stock_check(ingredient)
@@ -13,8 +13,12 @@ class Pantry
     @stock[ingredient] += amount
   end
 
+# CODE REVIEW
   def enough_ingredients_for?(recipe)
-    require "pry"; binding.pry
+    recipe.ingredients_required.all? do |ingredient, amount|
+      @stock[ingredient] >= amount
+    # require "pry"; binding.pry
+    end
   end
 
 end
